@@ -1,27 +1,23 @@
-import express, { json } from "express";
-import axios from "axios";
-import SkincareProduct from "./SkincareProduct.cjs";
+const express = require("express");
+const SkincareProduct = require("./SkincareProduct");
+const cors = require("cors");
 
 let products = [];
 
-var app = express();
+const app = express();
+const port = 3000;
 
-app.get("/", function (req, res) {
-  res.send("Hello world!");
-});
+app.use(express.json());
+app.use(cors());
 
-app.post("/products", function (req, res) {
-  let data = req.query.hello;
-  //pass the quiz answers into the decision tree to get products
-  if ((data = "bye")) {
-    products.push(new SkincareProduct());
-  }
+app.post("/quiz_answers", function (req, res) {
+    //pass the quiz answers into the decision tree to get products
 
-  res.send("bye");
+    res.send("accepted");
 });
 
 app.get("/products", function (req, res) {
-  res.send(JSON.stringify(products));
+    res.send(JSON.stringify(products));
 });
 
-app.listen(3000);
+app.listen(port, () => console.log("Running server on port: " + port));
