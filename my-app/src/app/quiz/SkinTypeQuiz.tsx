@@ -79,7 +79,6 @@ export default function SkinTypeQuiz({ onComplete }: SkinTypeQuizProps) {
     if (currentQuestion < QUIZ_QUESTIONS.length - 1) {
       setCurrentQuestion(currentQuestion + 1);
     } else {
-      // Find the skin type with the highest score
       let maxScore = 0;
       let maxSkinType: SkinTypeResult = null;
       

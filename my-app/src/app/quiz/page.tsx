@@ -4,13 +4,29 @@ import { useState } from "react";
 import HoverComponent from "./HoverComponent";
 import SkinTypeQuiz from "./SkinTypeQuiz";
 
-let type = "";
-
 export default function Quiz() {
     const [selectedSkinType, setSelectedSkinType] = useState<string | null>(
         null
     );
     const [showQuiz, setShowQuiz] = useState(false);
+    const fetchData = () => {
+        fetch("http://localhost:3001/skin_type", {
+            method: "POST",
+            body: JSON.stringify({
+                skin_type: selectedSkinType,
+            }),
+            headers: {
+                "Content-type":
+                    "application/json; charset=UTF-8",
+            },
+        })
+    }
+
+    const handleClick = () => {
+      fetchData();
+      setSelectedSkinType(null);
+      setShowQuiz(false);
+    }
 
     const handleSkinTypeSelect = (type: string) => {
         if (type === "Not sure") {
@@ -46,18 +62,7 @@ export default function Quiz() {
                         Select a Different Skin Type
                     </button>
                     <button
-                        onClick={() =>
-                            fetch("http://localhost:3001/skin_type", {
-                                method: "POST",
-                                body: JSON.stringify({
-                                    skin_type: selectedSkinType,
-                                }),
-                                headers: {
-                                    "Content-type":
-                                        "application/json; charset=UTF-8",
-                                },
-                            })
-                        }
+                        onClick={handleClick}
                         className="font-bold text-center bg-sky-600 text-white py-3 px-8 rounded-full transition duration-150 ease-in-out hover:bg-sky-700"
                     >
                         Continue
