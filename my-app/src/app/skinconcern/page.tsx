@@ -1,14 +1,19 @@
 'use client'
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import ConcernHoverComponent from "./ConcernHoverComponent";
 import ProductDisplay from "./ProductDisplay";
 import SkinConcernQuiz from "./SkinConcernQuiz";
 
-export default function SkinConcernPage() {
+// Create a client component that uses useSearchParams
+function SkinConcernContent() {
+    const searchParams = useSearchParams();
+    const [skinType, setSkinType] = useState<string | null>(null);
     const [selectedConcern, setSelectedConcern] = useState<string | null>(null);
     const [showProducts, setShowProducts] = useState(false);
     const [showQuiz, setShowQuiz] = useState(false);
+    
     const fetchData = () => {
         fetch("http://localhost:3001/skin_concern", {
             method: "POST",
@@ -21,6 +26,12 @@ export default function SkinConcernPage() {
             },
         })
     }
+    
+    useEffect(() => {
+        const type = searchParams.get('skinType');
+        setSkinType(type);
+    }, [searchParams]);
+    
     const handleConcernSelect = (concern: string) => {
         if (concern === "Not sure") {
             setShowQuiz(true);
@@ -153,7 +164,10 @@ export default function SkinConcernPage() {
                 
                 {showProducts && selectedConcern && (
                     <div className="mt-6">
-                        <ProductDisplay concern={selectedConcern} />
+                        <ProductDisplay 
+                            concern={selectedConcern} 
+                            skinType={skinType}
+                        />
                         <div className="flex justify-center mt-8">
                             <button
                                 onClick={() => setShowProducts(false)}
@@ -166,5 +180,23 @@ export default function SkinConcernPage() {
                 )}
             </div>
         </div>
+    );
+}
+
+// Add a loading UI
+function LoadingUI() {
+    return (
+        <div className="flex justify-center items-center min-h-screen">
+            <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-sky-600"></div>
+        </div>
+    );
+}
+
+// Main component wrapped in Suspense
+export default function SkinConcernPage() {
+    return (
+        <Suspense fallback={<LoadingUI />}>
+            <SkinConcernContent />
+        </Suspense>
     );
 }

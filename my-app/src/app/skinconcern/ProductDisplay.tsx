@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react';
+import React from 'react';
 import Image from 'next/image';
 
 interface Product {
@@ -7,89 +7,238 @@ interface Product {
     activeIngredient: string;
     properties: string;
     description: string;
-    imageSrc: string;
+    link: string;
+    suitableFor: string; // Single skin type this product is suitable for
 }
 
-// Sample product data organized by skin concern
+// Updated product data with one product per active ingredient per skin type
 const productsByConcern: Record<string, Product[]> = {
     "Acne": [
         {
             name: "...",
             activeIngredient: "Retinol",
-            properties: "...",
+            properties: "A derivative of Vitamin A that promotes cell turnover, reduces texture irregularities, and smoothens the skin over time.",
             description: "...",
-            imageSrc: "/product-placeholder.webp"
+            link: "...",
+            suitableFor: "Oily"
         },
         {
             name: "...",
             activeIngredient: "Benzoyl Peroxide",
-            properties: "...",
+            properties: "An anti-acne antibiotic, helping to fight against excess skin bacteria and prevent inflammation that causes acne.",
             description: "...",
-            imageSrc: "/product-placeholder.webp"
+            link: "...",
+            suitableFor: "Combination"
         },
         {
             name: "...",
             activeIngredient: "Azelaic Acid",
-            properties: "...",
+            properties: "A naturally occurring acid found in yeast, it has strong antibacterial properties and can help to fight against acne and skin inflammation.",
             description: "...",
-            imageSrc: "/product-placeholder.webp"
+            link: "...",
+            suitableFor: "Dry"
         }
     ],
-    // Other concern categories would be filled with their corresponding products
-    "Aging": [],
-    "Hyperpigmentation": [],
-    "Sensitivity": [],
-    "Dullness": [],
-    "Uneven Texture": []
+    "Aging": [
+        {
+            name: "...",
+            activeIngredient: "Vitamin C",
+            properties: "A potent antioxidant that brightens skin, fades dark spots, and boosts collagen production for a radiant and youthful look.",
+            description: "...",
+            link: "...",
+            suitableFor: "Dry"
+        },
+        {
+            name: "...",
+            activeIngredient: "Retinol",
+            properties: "A derivative of Vitamin A that promotes cell turnover, reduces texture irregularities, and smoothens the skin over time.",
+            description: "...",
+            link: "...",
+            suitableFor: "Oily"
+        },
+        {
+            name: "...",
+            activeIngredient: "Hyaluronic Acid",
+            properties: "A powerful hydrating molecule that can retain water, helping the skin stay moisturized and plump.",
+            description: "...",
+            link: "...",
+            suitableFor: "Sensitive"
+        }
+    ],
+    "Hyperpigmentation": [
+        {
+            name: "...",
+            activeIngredient: "Vitamin C",
+            properties: "A potent antioxidant that brightens skin, fades dark spots, and boosts collagen production for a radiant and youthful look.",
+            description: "...",
+            link: "...",
+            suitableFor: "Combination"
+        },
+        {
+            name: "...",
+            activeIngredient: "Retinol",
+            properties: "A derivative of Vitamin A that promotes cell turnover, reduces texture irregularities, and smoothens the skin over time.",
+            description: "...",
+            link: "...",
+            suitableFor: "Oily"
+        },
+        {
+            name: "...",
+            activeIngredient: "Hydroquinone",
+            properties: "A depigmentation agent that helps to inhibit the production of melanin wherever it's applied.",
+            description: "...",
+            link: "...",
+            suitableFor: "Dry"
+        }
+    ],
+    "Sensitivity": [
+        {
+            name: "...",
+            activeIngredient: "Hyaluronic Acid",
+            properties: "A powerful hydrating molecule that can retain water, helping the skin stay moisturized and plump.",
+            description: "...",
+            link: "...",
+            suitableFor: "Dry"
+        },
+        {
+            name: "...",
+            activeIngredient: "Aloe Vera",
+            properties: "Known for its soothing and calming properties, it can reduce irritation and redness while supporting skin repair.",
+            description: "...",
+            link: "...",
+            suitableFor: "Oily"
+        },
+        {
+            name: "...",
+            activeIngredient: "Ceramides",
+            properties: "Essential lipids that help strengthen the skin's natural barrier, protecting against external irritants and locking in moisture.",
+            description: "...",
+            link: "...",
+            suitableFor: "Combination"
+        }
+    ],
+    "Dullness": [
+        {
+            name: "...",
+            activeIngredient: "AHAs",
+            properties: "A chemical exfoliant that removes dead skin cells, improving texture and promoting a brighter complexion.",
+            description: "...",
+            link: "...",
+            suitableFor: "Oily"
+        },
+        {
+            name: "...",
+            activeIngredient: "Hyaluronic Acid",
+            properties: "A powerful hydrating molecule that can retain water, helping the skin stay moisturized and plump.",
+            description: "...",
+            link: "...",
+            suitableFor: "Dry"
+        },
+        {
+            name: "...",
+            activeIngredient: "Vitamin C",
+            properties: "A potent antioxidant that brightens skin, fades dark spots, and boosts collagen production for a radiant and youthful look.",
+            description: "...",
+            link: "...",
+            suitableFor: "Combination"
+        }
+    ],
+    "Uneven Texture": [
+        {
+            name: "...",
+            activeIngredient: "Retinol",
+            properties: "A derivative of Vitamin A that promotes cell turnover, reduces texture irregularities, and smoothens the skin over time.",
+            description: "...",
+            link: "...",
+            suitableFor: "Oily"
+        },
+        {
+            name: "...",
+            activeIngredient: "AHA",
+            properties: "A chemical exfoliant that removes dead skin cells and improves the appearance of uneven texture, leaving the skin smoother.",
+            description: "...",
+            link: "...",
+            suitableFor: "Combination"
+        },
+        {
+            name: "...",
+            activeIngredient: "Peptides",
+            properties: "Boost collagen production, enhancing firmness and promoting even texture.",
+            description: "...",
+            link: "...",
+            suitableFor: "Dry"
+        }
+    ]
 };
 
-export default function ProductDisplay({ concern }: { concern: string }) {
-    const [hoveredProduct, setHoveredProduct] = useState<Product | null>(null);
+interface ProductDisplayProps {
+    concern: string;
+    skinType: string | null;
+}
+
+export default function ProductDisplay({ concern, skinType }: ProductDisplayProps) {
+    // Get all products for the selected concern
+    const allProducts = productsByConcern[concern] || [];
     
-    const products = productsByConcern[concern] || [];
+    // Filter products by skin type
+    const filteredProducts = skinType 
+        ? allProducts.filter(product => product.suitableFor === skinType)
+        : allProducts;
     
-    if (products.length === 0) {
+    if (filteredProducts.length === 0) {
         return (
             <div className="text-center p-8">
-                <p className="text-gray-700">No products available for this concern yet.</p>
+                <p className="text-gray-700">No specific active ingredients found for {concern} with {skinType} skin type. Here are general recommendations:</p>
+                <div className="mt-4">
+                    {allProducts.map((product, index) => (
+                        <div key={index} className="mb-2">
+                            <span className="font-semibold">{product.activeIngredient}</span> - Best for {product.suitableFor} skin
+                        </div>
+                    ))}
+                </div>
             </div>
         );
     }
     
+    // Display single product in the middle
+    const product = filteredProducts[0];
+    
     return (
         <div className="mt-8">
-            <h2 className="font-bold text-3xl text-sky-600 mb-6 text-center">Recommended Products for {concern}</h2>
+            <h2 className="font-bold text-3xl text-sky-600 mb-6 text-center">
+                Recommended for {concern} with {skinType} Skin
+            </h2>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                {products.map((product, index) => (
-                    <div 
-                        key={index}
-                        className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"
-                        onMouseEnter={() => setHoveredProduct(product)}
-                        onMouseLeave={() => setHoveredProduct(null)}
-                    >
-                        <div className="flex justify-center mb-4">
-                            <div className="w-32 h-32 relative">
-                                <Image
-                                    src={product.imageSrc}
-                                    alt={product.name}
-                                    fill
-                                    className="object-cover rounded-md"
-                                />
-                            </div>
+            <div className="flex justify-center">
+                <div className="bg-white p-6 rounded-lg shadow-md max-w-md w-full">
+                    <div className="flex justify-center mb-4">
+                        <div className="w-32 h-32 relative">
+                            <Image
+                                src="/product-placeholder.webp"
+                                alt={product.activeIngredient}
+                                fill
+                                className="object-cover rounded-md"
+                            />
                         </div>
-                        
-                        <h3 className="font-bold text-xl text-center mb-2">{product.name}</h3>
-                        
-                        {hoveredProduct === product && (
-                            <div className="bg-gray-100 p-4 rounded-md mt-3 transition-opacity duration-150">
-                                <p className="font-semibold text-sky-700 mb-1">Active Ingredient: {product.activeIngredient}</p>
-                                <p className="text-sm mb-2">{product.properties}</p>
-                                <p className="text-sm">{product.description}</p>
-                            </div>
-                        )}
                     </div>
-                ))}
+                    
+                    <h3 className="font-bold text-xl text-center mb-2">{product.activeIngredient}</h3>
+                    
+                    <div className="bg-gray-100 p-4 rounded-md mt-3">
+                        <p className="font-semibold text-sky-700 mb-1">Product: {product.name}</p>
+                        <p className="text-sm mb-2">{product.properties}</p>
+                        <p className="text-sm">{product.description}</p>
+                        <p className="text-sm mt-2 italic">Best for: {product.suitableFor} skin</p>
+                        <a 
+                            href={product.link} 
+                            className="text-sky-600 hover:text-sky-800 underline mt-2 block text-center"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            View Product
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     );

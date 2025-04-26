@@ -26,7 +26,7 @@ export default function Quiz() {
 
     const handleClick = () => {
       fetchData();
-      router.push("/skinconcern");
+      router.push(`/skinconcern?skinType=${selectedSkinType}`);
     }
 
     const handleSkinTypeSelect = (type: string) => {
