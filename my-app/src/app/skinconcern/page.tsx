@@ -108,10 +108,10 @@ function SkinConcernContent() {
             <div className="grid justify-center p-7">
                 <Image
                     className="m-auto"
-                    src="/skinconcern.webp"
-                    alt="Skin concern"
-                    width={300}
-                    height={300}
+                    src="/skinconcerns.webp"
+                    alt="Skin type"
+                    width={200}
+                    height={200}
                     priority
                 />
 

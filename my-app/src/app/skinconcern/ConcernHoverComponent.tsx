@@ -38,7 +38,7 @@ export default function ConcernHoverComponent({ name, onConcernSelect }: { name:
             onMouseLeave={() => setIsHovering(false)}
         >
             <button 
-                className="w-40 h-15 font-bold text-center bg-sky-600 text-white p-2 rounded-full transition duration-150 ease-in-out hover:bg-sky-800 hover:drop-shadow-md"
+                className="w-60 h-15 font-bold text-center bg-sky-600 text-white p-2 rounded-full transition duration-150 ease-in-out hover:bg-sky-800 hover:drop-shadow-md"
                 onClick={handleClick}
             >
                 {name}
