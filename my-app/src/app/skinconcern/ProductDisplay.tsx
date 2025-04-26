@@ -8,6 +8,7 @@ interface Product {
     properties: string;
     description: string;
     link: string;
+    imageSrc: string; // Image source for the product
     suitableFor: string; // Single skin type this product is suitable for
 }
 
@@ -15,11 +16,12 @@ interface Product {
 const productsByConcern: Record<string, Product[]> = {
     "Acne": [
         {
-            name: "...",
+            name: "The Ordinary Retinol 1% in Squalane",
             activeIngredient: "Retinol",
             properties: "A derivative of Vitamin A that promotes cell turnover, reduces texture irregularities, and smoothens the skin over time.",
-            description: "...",
-            link: "...",
+            description: "Targets fine lines, wrinkles, and uneven skin texture.",
+            link: "https://arc.net/l/quote/zqqhhblt",
+            imageSrc: "https://m.media-amazon.com/images/I/517xAVDCKYL._SX522_.jpg",
             suitableFor: "Oily"
         },
         {
@@ -28,6 +30,7 @@ const productsByConcern: Record<string, Product[]> = {
             properties: "An anti-acne antibiotic, helping to fight against excess skin bacteria and prevent inflammation that causes acne.",
             description: "...",
             link: "...",
+            imageSrc: "...",
             suitableFor: "Combination"
         },
         {
@@ -36,6 +39,7 @@ const productsByConcern: Record<string, Product[]> = {
             properties: "A naturally occurring acid found in yeast, it has strong antibacterial properties and can help to fight against acne and skin inflammation.",
             description: "...",
             link: "...",
+            imageSrc: "...",
             suitableFor: "Dry"
         }
     ],
@@ -46,6 +50,7 @@ const productsByConcern: Record<string, Product[]> = {
             properties: "A potent antioxidant that brightens skin, fades dark spots, and boosts collagen production for a radiant and youthful look.",
             description: "...",
             link: "...",
+            imageSrc: "...",
             suitableFor: "Dry"
         },
         {
@@ -54,6 +59,7 @@ const productsByConcern: Record<string, Product[]> = {
             properties: "A derivative of Vitamin A that promotes cell turnover, reduces texture irregularities, and smoothens the skin over time.",
             description: "...",
             link: "...",
+            imageSrc: "...",
             suitableFor: "Oily"
         },
         {
@@ -62,6 +68,7 @@ const productsByConcern: Record<string, Product[]> = {
             properties: "A powerful hydrating molecule that can retain water, helping the skin stay moisturized and plump.",
             description: "...",
             link: "...",
+            imageSrc: "...",
             suitableFor: "Sensitive"
         }
     ],
@@ -72,6 +79,7 @@ const productsByConcern: Record<string, Product[]> = {
             properties: "A potent antioxidant that brightens skin, fades dark spots, and boosts collagen production for a radiant and youthful look.",
             description: "...",
             link: "...",
+            imageSrc: "...",
             suitableFor: "Combination"
         },
         {
@@ -80,6 +88,7 @@ const productsByConcern: Record<string, Product[]> = {
             properties: "A derivative of Vitamin A that promotes cell turnover, reduces texture irregularities, and smoothens the skin over time.",
             description: "...",
             link: "...",
+            imageSrc: "...",
             suitableFor: "Oily"
         },
         {
@@ -88,6 +97,7 @@ const productsByConcern: Record<string, Product[]> = {
             properties: "A depigmentation agent that helps to inhibit the production of melanin wherever it's applied.",
             description: "...",
             link: "...",
+            imageSrc: "...",
             suitableFor: "Dry"
         }
     ],
@@ -98,6 +108,7 @@ const productsByConcern: Record<string, Product[]> = {
             properties: "A powerful hydrating molecule that can retain water, helping the skin stay moisturized and plump.",
             description: "...",
             link: "...",
+            imageSrc: "...",
             suitableFor: "Dry"
         },
         {
@@ -106,6 +117,7 @@ const productsByConcern: Record<string, Product[]> = {
             properties: "Known for its soothing and calming properties, it can reduce irritation and redness while supporting skin repair.",
             description: "...",
             link: "...",
+            imageSrc: "...",
             suitableFor: "Oily"
         },
         {
@@ -114,6 +126,7 @@ const productsByConcern: Record<string, Product[]> = {
             properties: "Essential lipids that help strengthen the skin's natural barrier, protecting against external irritants and locking in moisture.",
             description: "...",
             link: "...",
+            imageSrc: "...",
             suitableFor: "Combination"
         }
     ],
@@ -124,6 +137,7 @@ const productsByConcern: Record<string, Product[]> = {
             properties: "A chemical exfoliant that removes dead skin cells, improving texture and promoting a brighter complexion.",
             description: "...",
             link: "...",
+            imageSrc: "...",
             suitableFor: "Oily"
         },
         {
@@ -132,6 +146,7 @@ const productsByConcern: Record<string, Product[]> = {
             properties: "A powerful hydrating molecule that can retain water, helping the skin stay moisturized and plump.",
             description: "...",
             link: "...",
+            imageSrc: "...",
             suitableFor: "Dry"
         },
         {
@@ -140,6 +155,7 @@ const productsByConcern: Record<string, Product[]> = {
             properties: "A potent antioxidant that brightens skin, fades dark spots, and boosts collagen production for a radiant and youthful look.",
             description: "...",
             link: "...",
+            imageSrc: "...",
             suitableFor: "Combination"
         }
     ],
@@ -150,6 +166,7 @@ const productsByConcern: Record<string, Product[]> = {
             properties: "A derivative of Vitamin A that promotes cell turnover, reduces texture irregularities, and smoothens the skin over time.",
             description: "...",
             link: "...",
+            imageSrc: "...",
             suitableFor: "Oily"
         },
         {
@@ -158,6 +175,7 @@ const productsByConcern: Record<string, Product[]> = {
             properties: "A chemical exfoliant that removes dead skin cells and improves the appearance of uneven texture, leaving the skin smoother.",
             description: "...",
             link: "...",
+            imageSrc: "...",
             suitableFor: "Combination"
         },
         {
@@ -166,6 +184,7 @@ const productsByConcern: Record<string, Product[]> = {
             properties: "Boost collagen production, enhancing firmness and promoting even texture.",
             description: "...",
             link: "...",
+            imageSrc: "...",
             suitableFor: "Dry"
         }
     ]
@@ -214,7 +233,7 @@ export default function ProductDisplay({ concern, skinType }: ProductDisplayProp
                     <div className="flex justify-center mb-4">
                         <div className="w-32 h-32 relative">
                             <Image
-                                src="/product-placeholder.webp"
+                                src={product.imageSrc}
                                 alt={product.activeIngredient}
                                 fill
                                 className="object-cover rounded-md"
