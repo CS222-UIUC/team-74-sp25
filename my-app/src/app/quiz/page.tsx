@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useState } from "react";
 import HoverComponent from "./HoverComponent";
 import SkinTypeQuiz from "./SkinTypeQuiz";
+import { useRouter } from "next/navigation";
 
 export default function Quiz() {
     const [selectedSkinType, setSelectedSkinType] = useState<string | null>(
@@ -21,11 +22,11 @@ export default function Quiz() {
             },
         })
     }
+    const router = useRouter();
 
     const handleClick = () => {
       fetchData();
-      setSelectedSkinType(null);
-      setShowQuiz(false);
+      router.push(`/skinconcern?skinType=${selectedSkinType}`);
     }
 
     const handleSkinTypeSelect = (type: string) => {
