@@ -25,6 +25,24 @@ const productsByConcern: Record<string, Product[]> = {
             suitableFor: "Oily"
         },
         {
+            name: "blah",
+            activeIngredient: "Benzoyl Peroxide",
+            properties: "An anti-acne antibiotic, helping to fight against excess skin bacteria and prevent inflammation that causes acne.",
+            description: "Targets fine lines, wrinkles, and uneven skin texture.",
+            link: "https://www.amazon.com/Rugby-Acne-Medication-42-5-Pack/dp/B00F5DFFYS/ref=sr_1_6_pp?crid=33S0KIIV1CBSC&dib=eyJ2IjoiMSJ9.rcNLpF_OllF_Kf4ys7LyPraNk28k77ariobFJZvvfoTqCxUOyGJkPJZom9HIfMBGW0vpuFTMvjSpzk6LFk8qRU0tgALnuMB-CqGUPOaOaApQUUjoHdT1OibxgphknXwXqM2w7VsotjxWpRuyDTd7FED9UtSWCQ2KekqhurvHPEVid14B5-lwaFHuiL3j_6RL7DMqnU5vJtFOfQG8TWLONcl_dvCCOgXxcx0dqgO69NzpCsNp90xJyrJkg_9Acs3ZFAWur61foazJd_IULbJGmw_nOhyFaAatYAblsTUCl_o.zyL0FxJqT5w7b_cAnchCjsmg6g9zBj7E3t7xY-eVs_E&dib_tag=se&keywords=benzoyl+peroxide&qid=1745526022&s=beauty&sprefix=benz%2Cbeauty%2C148&sr=1-6",
+            imageSrc: "https://m.media-amazon.com/images/I/81LwHyd1WGL.__AC_SX300_SY300_QL70_FMwebp_.jpg",
+            suitableFor: "Oily"
+        },
+        {
+            name: "blah",
+            activeIngredient: "Azelaic Acid",
+            properties: "A naturally occurring acid found in yeast, it has strong antibacterial properties and can help to fight against acne and skin inflammation.",
+            description: "Targets fine lines, wrinkles, and uneven skin texture.",
+            link: "https://www.amazon.com/Paulas-Choice-BOOST-Azelaic-Licorice-Salicylic/dp/B00V4PNAI4/ref=sr_1_1_sspa?crid=2O81WL72NPLSJ&dib=eyJ2IjoiMSJ9.jkfuIobc0_EEtCS-6cz0tGAHSNNmxr2RTk_7ZgdMxLPGrb7Py4pdJPzxCAhCSWWH48eAnZG6kC1VNmG4cEGaDvh7wQC2jjuvjv_NsKGys7BpRvCpZAmgIEcm5tXlYNxqp4Px2X5zCMKPTC6fykBEwl0HWlOhZBwwwsgbIiq2RitFWwqXLX0OlpjB-VYzazQJbZIHzgp95qXYrqfr4k1jdyazmF41R_D4fOubmcoAEPA6PdSiAjcygj8D03xhgDdXH0mv2VZJUHGsfPgsC2etKodyFtAMHvsWYFnPY4pMo3w.iwzsI0CVw-GPRMIh6pvrniJo-3dj0TRErb4A9386zUM&dib_tag=se&keywords=Azelaic%2BAcid&qid=1745526375&s=beauty&sprefix=azelaic%2Bacid%2Cbeauty%2C153&sr=1-1-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&th=1",
+            imageSrc: "https://m.media-amazon.com/images/I/312fOY15bOL._SY445_SX342_QL70_FMwebp_.jpg",
+            suitableFor: "Oily"
+        },
+        {
             name: "...",
             activeIngredient: "Benzoyl Peroxide",
             properties: "An anti-acne antibiotic, helping to fight against excess skin bacteria and prevent inflammation that causes acne.",
@@ -218,46 +236,46 @@ export default function ProductDisplay({ concern, skinType }: ProductDisplayProp
             </div>
         );
     }
-    
-    // Display single product in the middle
-    const product = filteredProducts[0];
-    
+
     return (
         <div className="mt-8">
             <h2 className="font-bold text-3xl text-sky-600 mb-6 text-center">
                 Recommended for {concern} with {skinType} Skin
             </h2>
-            
-            <div className="flex justify-center">
-                <div className="bg-white p-6 rounded-lg shadow-md max-w-md w-full">
-                    <div className="flex justify-center mb-4">
-                        <div className="w-32 h-32 relative">
-                            <Image
-                                src={product.imageSrc}
-                                alt={product.activeIngredient}
-                                fill
-                                className="object-cover rounded-md"
-                            />
+            <div className="flex flex-wrap justify-center gap-6">
+                {filteredProducts.map((product, index) => (
+                    <div className="flex justify-center" key={index}>
+                        <div className=" bg-white p-6 rounded-lg shadow-md max-w-md w-full">
+                            <div className="flex justify-center mb-4">
+                                <div className="w-32 h-32 relative">
+                                    <Image
+                                        src={product.imageSrc}
+                                        alt={product.activeIngredient}
+                                        fill
+                                        className="object-cover rounded-md"
+                                    />
+                                </div>
+                            </div>
+                            
+                            <h3 className="font-bold text-xl text-center mb-2">{product.activeIngredient}</h3>
+                            
+                            <div className="bg-gray-100 p-4 rounded-md mt-3">
+                                <p className="font-semibold text-sky-700 mb-1">Product: {product.name}</p>
+                                <p className="text-sm mb-2">{product.properties}</p>
+                                <p className="text-sm">{product.description}</p>
+                                <p className="text-sm mt-2 italic">Best for: {product.suitableFor} skin</p>
+                                <a 
+                                    href={product.link} 
+                                    className="text-sky-600 hover:text-sky-800 underline mt-2 block text-center"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    View Product
+                                </a>
+                            </div>
                         </div>
                     </div>
-                    
-                    <h3 className="font-bold text-xl text-center mb-2">{product.activeIngredient}</h3>
-                    
-                    <div className="bg-gray-100 p-4 rounded-md mt-3">
-                        <p className="font-semibold text-sky-700 mb-1">Product: {product.name}</p>
-                        <p className="text-sm mb-2">{product.properties}</p>
-                        <p className="text-sm">{product.description}</p>
-                        <p className="text-sm mt-2 italic">Best for: {product.suitableFor} skin</p>
-                        <a 
-                            href={product.link} 
-                            className="text-sky-600 hover:text-sky-800 underline mt-2 block text-center"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
-                            View Product
-                        </a>
-                    </div>
-                </div>
+                ))}
             </div>
         </div>
     );
