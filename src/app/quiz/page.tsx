@@ -1,32 +1,31 @@
 "use client";
-import Image from "next/image";
 import { useState } from "react";
 import HoverComponent from "./HoverComponent";
 import SkinTypeQuiz from "./SkinTypeQuiz";
 import { useRouter } from "next/navigation";
 
+
 export default function Quiz() {
+    const getAssetPath = (path: string) => {
+        const basePath = process.env.NODE_ENV === 'production' ? '/TEAM-74-SP25' : '';
+        return `${basePath}${path}`;
+    };
+
+    const getInternalPath = (path: string) => {
+        const basePath = process.env.NODE_ENV === 'production' ? '/TEAM-74-SP25' : '';
+        return `${basePath}${path}`;
+    };
+
     const [selectedSkinType, setSelectedSkinType] = useState<string | null>(
         null
     );
     const [showQuiz, setShowQuiz] = useState(false);
-    const fetchData = () => {
-        fetch("http://localhost:3001/skin_type", {
-            method: "POST",
-            body: JSON.stringify({
-                skin_type: selectedSkinType,
-            }),
-            headers: {
-                "Content-type":
-                    "application/json; charset=UTF-8",
-            },
-        })
-    }
+
     const router = useRouter();
 
     const handleClick = () => {
-      fetchData();
-      router.push(`/skinconcern?skinType=${selectedSkinType}`);
+        router.push(getInternalPath(`/skinconcern?skinType=${selectedSkinType}`));
+
     }
 
     const handleSkinTypeSelect = (type: string) => {
@@ -91,13 +90,12 @@ export default function Quiz() {
     return (
         <div>
             <div className="grid justify-center p-7">
-                <Image
+                <img
                     className="m-auto"
-                    src="/skintype.webp"
+                    src={getAssetPath("/skintype.webp")}
                     alt="Skin type"
                     width={300}
                     height={300}
-                    priority
                 />
 
                 {!showQuiz && !selectedSkinType && (
