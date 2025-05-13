@@ -25,6 +25,7 @@ export default function Quiz() {
 
     const handleClick = () => {
         router.push(getInternalPath(`/skinconcern?skinType=${selectedSkinType}`));
+
     }
 
     const handleSkinTypeSelect = (type: string) => {
