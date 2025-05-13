@@ -1,11 +1,14 @@
 'use client'
-import Image from "next/image";
 import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import ConcernHoverComponent from "./ConcernHoverComponent";
 import ProductDisplay from "./ProductDisplay";
 import SkinConcernQuiz from "./SkinConcernQuiz";
 
+const getAssetPath = (path: string) => {
+    const basePath = process.env.NODE_ENV === 'production' ? '/TEAM-74-SP25' : '';
+    return `${basePath}${path}`;
+};
 // Create a client component that uses useSearchParams
 function SkinConcernContent() {
     const searchParams = useSearchParams();
@@ -13,25 +16,14 @@ function SkinConcernContent() {
     const [selectedConcern, setSelectedConcern] = useState<string | null>(null);
     const [showProducts, setShowProducts] = useState(false);
     const [showQuiz, setShowQuiz] = useState(false);
-    
-    const fetchData = () => {
-        fetch("http://localhost:3001/skin_concern", {
-            method: "POST",
-            body: JSON.stringify({
-                skin_type: selectedConcern,
-            }),
-            headers: {
-                "Content-type":
-                    "application/json; charset=UTF-8",
-            },
-        })
-    }
-    
+
+
+
     useEffect(() => {
         const type = searchParams.get('skinType');
         setSkinType(type);
     }, [searchParams]);
-    
+
     const handleConcernSelect = (concern: string) => {
         if (concern === "Not sure") {
             setShowQuiz(true);
@@ -49,7 +41,6 @@ function SkinConcernContent() {
     };
 
     const handleContinue = () => {
-        fetchData();
         if (selectedConcern) {
             setShowProducts(true);
         }
@@ -106,13 +97,12 @@ function SkinConcernContent() {
     return (
         <div>
             <div className="grid justify-center p-7">
-                <Image
+                <img
                     className="m-auto"
-                    src="/skinconcerns.webp"
+                    src={getAssetPath("/skinconcerns.webp")}
                     alt="Skin type"
                     width={200}
                     height={200}
-                    priority
                 />
 
                 {!selectedConcern && !showQuiz && !showProducts && (
@@ -161,11 +151,11 @@ function SkinConcernContent() {
                 )}
 
                 {selectedConcern && !showProducts && renderSelectedConcernMessage()}
-                
+
                 {showProducts && selectedConcern && (
                     <div className="mt-6">
-                        <ProductDisplay 
-                            concern={selectedConcern} 
+                        <ProductDisplay
+                            concern={selectedConcern}
                             skinType={skinType}
                         />
                         <div className="flex justify-center mt-8">
