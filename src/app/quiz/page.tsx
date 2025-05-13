@@ -10,6 +10,12 @@ export default function Quiz() {
         const basePath = process.env.NODE_ENV === 'production' ? '/TEAM-74-SP25' : '';
         return `${basePath}${path}`;
     };
+
+    const getInternalPath = (path: string) => {
+        const basePath = process.env.NODE_ENV === 'production' ? '/TEAM-74-SP25' : '';
+        return `${basePath}${path}`;
+    };
+
     const [selectedSkinType, setSelectedSkinType] = useState<string | null>(
         null
     );
@@ -18,7 +24,7 @@ export default function Quiz() {
     const router = useRouter();
 
     const handleClick = () => {
-        router.push(`/skinconcern?skinType=${selectedSkinType}`);
+        router.push(getInternalPath(`/skinconcern?skinType=${selectedSkinType}`));
     }
 
     const handleSkinTypeSelect = (type: string) => {
