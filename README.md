@@ -12,8 +12,6 @@ Our app focuses on finding skin type/primary skin issues/right products for our 
 
 Frontend: React TypeScript
 
-Backend: ExpressJS
-
 ## Installation
 
 1. Install [NodeJS](https://nodejs.org/en/download) 
@@ -29,7 +27,7 @@ npm start
 
 ## Group Members
 
-- Aaron Alexander: Frontend
-- Max Li: Frontend
-- David Dai: Backend
+- Aaron Alexander
+- Max Li
+- David Dai
 
